@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "506502f683f4f3ed15c461e3ae940a15",
+    "content-hash": "2c826f7e4573d42c923b6d8ba2f1f459",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1484,6 +1484,74 @@
                 }
             ],
             "time": "2023-10-12T05:21:21+00:00"
+        },
+        {
+            "name": "gflaminio3/telara",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gflaminio3/telara.git",
+                "reference": "b1eba06b42751d56ded47071babe935c5267052b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gflaminio3/telara/zipball/b1eba06b42751d56ded47071babe935c5267052b",
+                "reference": "b1eba06b42751d56ded47071babe935c5267052b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.18.1",
+                "pestphp/pest": "^3.5.1",
+                "pestphp/pest-plugin-type-coverage": "^3.1",
+                "phpstan/phpstan": "^1.12.7",
+                "rector/rector": "^1.2.8",
+                "symfony/var-dumper": "^7.1.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Telara\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giuseppe Flaminio",
+                    "email": "gflaminio3@gmail.com"
+                }
+            ],
+            "description": "A custom Laravel package that provides a storage disk for uploading files to Telegram and retrieving them seamlessly",
+            "keywords": [
+                "php",
+                "storage",
+                "telegram"
+            ],
+            "support": {
+                "issues": "https://github.com/gflaminio3/telara/issues",
+                "source": "https://github.com/gflaminio3/telara/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/nunomaduro",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-12-27T21:47:41+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -11028,7 +11096,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "gflaminio3/telara": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
