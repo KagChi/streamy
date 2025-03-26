@@ -11,6 +11,11 @@ class Track extends Model
         'cover',
         'isrc',
         'duration',
+        'files',
+    ];
+
+    protected $casts = [
+        'files' => 'array',
     ];
 
     public function artists()

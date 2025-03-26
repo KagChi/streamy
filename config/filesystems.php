@@ -58,9 +58,8 @@ return [
         ],
 
         'telegram' => [
-            'driver'    => 'telara',
-            'bot_token' => env('TELEGRAM_BOT_TOKEN'),
-            'chat_id'   => env('TELEGRAM_CHAT_ID'),
+            'driver' => 'telegram',
+            'chat_id' => env('TELEGRAM_CHAT_ID'),
         ],
     ],
 
