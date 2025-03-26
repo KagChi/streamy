@@ -8,5 +8,5 @@ Route::get("/", function () {
     return Inertia::render("Home");
 });
 
-Route::get('/proxy/telegram/{file}', [TelegramProxyController::class, 'fetchFile'])
+Route::get('/file_proxy/{file}', [TelegramProxyController::class, 'fetchFile'])
     ->where('file', '.*');

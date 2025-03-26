@@ -128,7 +128,7 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
             throw new RuntimeException("File not found in the database.");
         }
 
-        return url("/proxy/telegram/{$path}");
+        return url("/file_proxy/{$path}");
     }
 
 
