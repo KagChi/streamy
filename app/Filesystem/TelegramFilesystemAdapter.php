@@ -29,8 +29,7 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
 
         $response = Telegram::sendDocument([
             'chat_id' => $this->chatId,
-            'document' => new InputFile($stream, $path),
-            'caption' => 'Here is your file!'
+            'document' => new InputFile($stream, $path)
         ]);
 
         fclose($stream);
@@ -58,8 +57,7 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
     {
         $response = Telegram::sendDocument([
             'chat_id' => $this->chatId,
-            'document' => new InputFile($contents, $path),
-            'caption' => 'Here is your streamed file!'
+            'document' => new InputFile($contents, $path)
         ]);
 
         if (isset($response['document']) || isset($response['audio'])) {
@@ -113,7 +111,13 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
 
     public function delete(string $path): void
     {
-        throw new RuntimeException("Telegram does not support file deletion.");
+        $file = TelegramFile::where('name', $path)->first();
+
+        if (!$file) {
+            return;
+        }
+
+        $file->delete();
     }
 
     public function getUrl(string $path): string
