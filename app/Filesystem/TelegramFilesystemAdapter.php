@@ -130,7 +130,7 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
 
         Telegram::getFile(['file_id' => $file->telegram_id]);
 
-        return url("/file_proxy/{$path}");
+        return url("/files/{$path}");
     }
 
     public function getLocalUrl(string $path): string
