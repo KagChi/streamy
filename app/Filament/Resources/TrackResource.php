@@ -14,7 +14,7 @@ class TrackResource extends Resource
 {
     protected static ?string $model = Track::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-musical-note';
 
     public static function form(Form $form): Form
     {
@@ -34,6 +34,7 @@ class TrackResource extends Resource
                     ->multiple()
                     ->preload()
                     ->searchable()
+                    ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('isrc')
                     ->columnSpanFull(),
