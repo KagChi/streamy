@@ -87,7 +87,8 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
             throw new RuntimeException("File not found in the database.");
         }
 
-        $fileUrl = "https://api.telegram.org/file/bot" . env('TELEGRAM_BOT_TOKEN') . "/{$file->path}";
+        $fileData = Telegram::getFile(['file_id' => $file->telegram_id]);
+        $fileUrl = "https://api.telegram.org/file/bot" . env('TELEGRAM_BOT_TOKEN') . "/{$fileData->filePath}";
 
         $contents = file_get_contents($fileUrl);
 
@@ -97,7 +98,6 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
 
         return $contents;
     }
-
 
     public function readStream(string $path)
     {
@@ -128,7 +128,23 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
             throw new RuntimeException("File not found in the database.");
         }
 
+        Telegram::getFile(['file_id' => $file->telegram_id]);
+
         return url("/file_proxy/{$path}");
+    }
+
+    public function getLocalUrl(string $path): string
+    {
+        $file = TelegramFile::where('name', $path)->first();
+
+        if (!$file || !$file->path) {
+            throw new RuntimeException("File not found in the database.");
+        }
+
+        $fileData = Telegram::getFile(['file_id' => $file->telegram_id]);
+        $fileUrl = "https://api.telegram.org/file/bot" . env('TELEGRAM_BOT_TOKEN') . "/{$fileData->filePath}";
+
+        return $fileUrl;
     }
 
 
