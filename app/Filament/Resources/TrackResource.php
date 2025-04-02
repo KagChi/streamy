@@ -59,8 +59,10 @@ class TrackResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('cover')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('cover') 
+                    ->disk('telegram')
+                    ->height(50)
+                    ->square(),
                 Tables\Columns\TextColumn::make('isrc')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('duration')

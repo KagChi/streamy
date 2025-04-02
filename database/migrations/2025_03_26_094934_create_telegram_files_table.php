@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('chat_id');
             $table->timestamps();
         });
-        
     }
 
     public function down()
