@@ -29,6 +29,12 @@ class TrackResource extends Resource
                     ->directory('covers')
                     ->label('Cover')
                     ->columnSpanFull(),
+                Forms\Components\Select::make('artists')
+                    ->relationship('artists', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('isrc')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('duration')
@@ -49,14 +55,6 @@ class TrackResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('cover') 
@@ -66,8 +64,14 @@ class TrackResource extends Resource
                 Tables\Columns\TextColumn::make('isrc')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('duration')
-                    ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
