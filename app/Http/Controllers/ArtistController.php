@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TrackResource;
-use App\Models\Track;
+use App\Http\Resources\ArtistResource;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
-class TrackController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = Track::query()
-            ->with('artists');
-
+        $query = Artist::query();
+        
         if ($request->has('search')) {
-            $search = $request->get('search');
-            $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('isrc', 'like', "%{$search}%");
+            $search = $request->input('search');
+            $query->where('name', 'like', "%{$search}%");
         }
 
-        return TrackResource::collection($query->paginate(15));
+        return ArtistResource::collection($query->paginate(15));
     }
 
     /**
@@ -36,15 +34,15 @@ class TrackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Track $track)
+    public function show(Artist $artist)
     {
-        return new TrackResource($track->load(['artists']));
+        return new ArtistResource($artist);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Track $track)
+    public function update(Request $request, Artist $artist)
     {
         //
     }
@@ -52,7 +50,7 @@ class TrackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Track $track)
+    public function destroy(Artist $artist)
     {
         //
     }

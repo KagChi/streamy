@@ -133,21 +133,6 @@ class TelegramFilesystemAdapter implements FilesystemAdapter
         return url("/files/{$path}");
     }
 
-    public function getLocalUrl(string $path): string
-    {
-        $file = TelegramFile::where('name', $path)->first();
-
-        if (!$file || !$file->path) {
-            throw new RuntimeException("File not found in the database.");
-        }
-
-        $fileData = Telegram::getFile(['file_id' => $file->telegram_id]);
-        $fileUrl = "https://api.telegram.org/file/bot" . env('TELEGRAM_BOT_TOKEN') . "/{$fileData->filePath}";
-
-        return $fileUrl;
-    }
-
-
     public function deleteDirectory(string $path): void {}
     public function createDirectory(string $path, Config $config): void {}
     public function setVisibility(string $path, string $visibility): void {

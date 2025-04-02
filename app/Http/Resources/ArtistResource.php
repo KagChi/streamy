@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ArtistResource extends JsonResource
 {
@@ -17,7 +18,8 @@ class ArtistResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'cover' => $this->cover,
+            'cover' => Storage::disk("telegram")
+                ->url($this->cover),
         ];
     }
 }
