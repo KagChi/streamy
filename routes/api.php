@@ -5,7 +5,8 @@ use App\Http\Controllers\ArtistController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'abilities:tracks:create'])->post('/tracks', [TrackController::class, 'store']);
-
-// For other routes, you can use the apiResource method
 Route::apiResource('tracks', TrackController::class)->except(['store']);
-Route::apiResource('artists', ArtistController::class);
+
+
+Route::middleware(['auth:sanctum', 'abilities:artists:create'])->post('/artists', [ArtistController::class, 'store']);
+Route::apiResource('artists', ArtistController::class)->except(['store']);
