@@ -10,7 +10,9 @@
         "gflaminio3/telara": "dev-master",
         "inertiajs/inertia-laravel": "^2.0",
         "irazasyed/telegram-bot-sdk": "^3.15",
+        "jeffgreco13/filament-breezy": "^2.6",
         "laravel/framework": "^12.2",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10"
     },
     "require-dev": {

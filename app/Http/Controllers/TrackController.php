@@ -19,7 +19,7 @@ class TrackController extends Controller
         if ($request->has('search')) {
             $search = $request->get('search');
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('isrc', 'like', "%{$search}%");
+                ->orWhere('isrc', 'like', "%{$search}%");
         }
 
         return TrackResource::collection($query->paginate(15));
@@ -30,7 +30,30 @@ class TrackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'isrc' => 'required|string|max:255|unique:tracks',
+            'file' => 'required|file|mimes:mp3,wav,flac,aac,ogg|max:102400',
+            'artist_ids' => 'required|array',
+            'artist_ids.*' => 'exists:artists,id',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'duration' => 'required|integer|min:0',
+        ]);
+
+        if ($request->hasFile('cover')) {
+            $imagePath = $request->file('cover')->store('covers', 'telegram');
+            $validated['cover'] = $imagePath;
+        }
+
+        if ($request->hasFile('file')) {
+            $audioPath = $request->file('file')->store('tracks', 'telegram');
+            $validated['files'] = explode(",", $audioPath);
+        }
+
+        $track = Track::create($validated);
+        $track->artists()->attach($validated['artist_ids']);
+        
+        return response('', 201);
     }
 
     /**

@@ -28,7 +28,19 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096'
+        ]);
+        
+        if ($request->hasFile('cover')) {
+            $imagePath = $request->file('cover')->store('covers', 'telegram');
+            $validated['cover'] = $imagePath;
+        }
+
+        $artist = Artist::create($validated);
+
+        return new ArtistResource($artist);
     }
 
     /**
